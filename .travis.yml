@@ -3,6 +3,7 @@ language: php
 php:
   - 5.4
 
+sudo: true
 
 before_install:
  - sudo apt-get install aria2 curl -y
