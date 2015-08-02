@@ -1,0 +1,10 @@
+language: php
+
+php:
+  - 5.4
+
+
+before_install:
+ - sudo apt-get install aria2 curl -y
+ - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/edgardmessias/informix-travis/informix-link-server.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; cd /tmp ; aria2c -x 16 ${DOWNLOAD_LINK} ; ls -l
+  
