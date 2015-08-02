@@ -100,10 +100,10 @@ fi
 echo ">>>    OS version: ${DISTRIB_DESCRIPTION}"
 echo ">>>    Linux Kernel version: ${KERNEL_VERSION}"
 echo ">>>    Upgrading OS and installing dependencies for Informix ${IFXDB_VERSION}"
-apt-get update  -qy
-myfatal $? "apt-get update failed"
-apt-get upgrade -qy
-myfatal $? "apt-get upgrade failed"
+#apt-get update  -qy
+#myfatal $? "apt-get update failed"
+#apt-get upgrade -qy
+#myfatal $? "apt-get upgrade failed"
 apt-get install -qy apt-utils adduser file sudo
 myfatal $? "apt-get install apt-utils adduser file"
 apt-get install -qy libaio1 bc pdksh libncurses5 ncurses-bin libpam0g
