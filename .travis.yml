@@ -6,11 +6,22 @@ php:
 sudo: true
 
 before_install:
+  - USER_HOME="/home/informix/"
+  - USER_HOME="${USER_HOME%/}"
+  - USER_NAME="informix"
+  - USER_PASS="ifx_pass"
+  - USER_UID=200
+  - GROUP_NAME="${USER_NAME}"
+  - GROUP_GID=200
+  - groupadd "${GROUP_NAME}" -g "${GROUP_GID}"
+  - useradd -m -d "${USER_HOME}" -g "${GROUP_NAME}" -u "${USER_UID}" "${USER_NAME}"
+  - adduser "${USER_NAME}" sudo
+  - echo "${USER_NAME}:${USER_PASS}" | chpasswd
   - sudo apt-get update -qq 
   - sudo apt-get install aria2 curl -y
   - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/edgardmessias/informix-travis/informix-link-server.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; aria2c -x 16 ${DOWNLOAD_LINK} ; ls -l
   - sudo chmod +x *.sh
-  - sudo -E ./informix_install.sh iif.12.10.FC5DE.linux-x86_64.tar
+  - sudo ./informix_install.sh iif.12.10.FC5DE.linux-x86_64.tar
 
 script:
   - echo Hola
