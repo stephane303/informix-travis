@@ -109,16 +109,16 @@ myfatal $? "apt-get install apt-utils adduser file"
 apt-get install -qy libaio1 bc pdksh libncurses5 ncurses-bin libpam0g
 myfatal $? "apt-get dependencies failed"
 
-echo ">>>    Create group and user for Informix"
-id "${USER_NAME}" 2>/dev/null >/dev/null
-if [ $? -eq 0 ] ; then
-	myfatal 253 "User ${USER_NAME} exists"
-fi
+#echo ">>>    Create group and user for Informix"
+#id "${USER_NAME}" 2>/dev/null >/dev/null
+#if [ $? -eq 0 ] ; then
+#	myfatal 253 "User ${USER_NAME} exists"
+#fi
 
-USER_ADD_CREATE_HOME=""
-if [ ! -d "${USER_HOME}" ] ; then
-	USER_ADD_CREATE_HOME="-m"
-fi
+#USER_ADD_CREATE_HOME=""
+#if [ ! -d "${USER_HOME}" ] ; then
+#	USER_ADD_CREATE_HOME="-m"
+#fi
 
 #groupadd "${GROUP_NAME}" -g "${GROUP_GID}" >/dev/null
 #myfatal 252 "Adding group ${GROUP_NAME} ID:${GROUP_GID} failed"
