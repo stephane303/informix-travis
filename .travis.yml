@@ -22,6 +22,7 @@ before_install:
   - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/edgardmessias/informix-travis/informix-link-server.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; aria2c -x 16 ${DOWNLOAD_LINK} ; ls -l
   - sudo chmod +x *.sh
   - sudo ./informix_install.sh iif.12.10.FC5DE.linux-x86_64.tar
+  - sudo ./informix_start.sh
 
 script:
   - echo Hola
