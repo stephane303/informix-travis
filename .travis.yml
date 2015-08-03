@@ -6,7 +6,6 @@ php:
 sudo: true
 
 before_install:
-  - sudo groupadd informix
   - sudo apt-get update -qq 
   - sudo apt-get install aria2 curl -y
   - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/edgardmessias/informix-travis/informix-link-server.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; aria2c -x 16 ${DOWNLOAD_LINK} ; ls -l

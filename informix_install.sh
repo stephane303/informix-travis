@@ -28,7 +28,7 @@ USER_NAME="informix"
 USER_PASS="ifx_pass"
 USER_UID=200
 
-GROUP_NAME="travis"
+GROUP_NAME="${USER_NAME}"
 GROUP_GID=200
 
 # Delete downloaded data including packages
@@ -120,16 +120,14 @@ if [ ! -d "${USER_HOME}" ] ; then
 	USER_ADD_CREATE_HOME="-m"
 fi
 
-#groupadd "${GROUP_NAME}" -g "${GROUP_GID}" >/dev/null
-#myfatal 252 "Adding group ${GROUP_NAME} ID:${GROUP_GID} failed"
+sudo groupadd "${GROUP_NAME}" -g "${GROUP_GID}" >/dev/null
+myfatal 252 "Adding group ${GROUP_NAME} ID:${GROUP_GID} failed"
 
-useradd ${USER_ADD_CREATE_HOME} -d "${USER_HOME}" -g "${GROUP_NAME}" -u "${USER_UID}" "${USER_NAME}"  >/dev/null
+sudo useradd ${USER_ADD_CREATE_HOME} -d "${USER_HOME}" -g "${GROUP_NAME}" -u "${USER_UID}" "${USER_NAME}"  >/dev/null
 myfatal 251 "Adding user ${USER_NAME} ID:${USER_UID} HOME:${USER_HOME} failed"
 
-adduser "${USER_NAME}" sudo  >/dev/null
+sudo adduser "${USER_NAME}" sudo  >/dev/null
 myfatal 250 "Adding user ${USER_NAME} to sudo group failed"
-
-usermod -a -G "${USER_NAME}" "${GROUP_NAME}"
 
 echo "${USER_NAME}:${USER_PASS}" | chpasswd
 
