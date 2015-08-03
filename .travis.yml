@@ -24,6 +24,9 @@ before_install:
   - sudo chmod +x *.sh
   - sudo ./informix_install.sh ${DOWNLOAD_FILE}
   - sudo ./informix_start.sh
+  - git clone https://git.php.net/repository/pecl/database/pdo_informix.git
+  - (cd pdo_informix/; phpize && ./configure && make && sudo make install)
+  - echo "extension=pdo_informix.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
   - echo Hola
