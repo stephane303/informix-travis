@@ -44,9 +44,9 @@ if [ ! -e "${INFORMIX_DATA_DIR}/.initialized" ] ; then
 fi
 
 
-DB_NAME=${DB_NAME:-}
-DB_USER=${DB_USER:-}
-DB_PASS=${DB_PASS:-}
+DB_NAME=${DB_NAME:-test}
+DB_USER=${DB_USER:-test}
+DB_PASS=${DB_PASS:-test}
 
 DB_INFO_FILE="${INFORMIX_HOME}/informix_dbinfo.sh"
 IFX_CREATE="NO"
