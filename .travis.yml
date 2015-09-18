@@ -11,8 +11,8 @@ before_install:
   - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/edgardmessias/informix-travis/informix-link-server.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; aria2c -x 16 ${DOWNLOAD_LINK} ; ls -l
   - DOWNLOAD_FILE=$(ls iif*.tar)
   - sudo chmod +x *.sh
-  - sudo -s ./informix_install.sh ${DOWNLOAD_FILE}
-  - sudo -s ./informix_start.sh
+  - sudo -i ./informix_install.sh ${DOWNLOAD_FILE}
+  - sudo -i ./informix_start.sh
   - export INFORMIXDIR=/opt/IBM/informix
   - git clone https://git.php.net/repository/pecl/database/pdo_informix.git
   - (cd pdo_informix/; phpize && ./configure --with-pdo-informix=${INFORMIXDIR} && make && sudo make install)
