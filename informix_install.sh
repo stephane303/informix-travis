@@ -120,16 +120,16 @@ if [ ! -d "${USER_HOME}" ] ; then
 	USER_ADD_CREATE_HOME="-m"
 fi
 
-sudo -i groupadd "${GROUP_NAME}" -g "${GROUP_GID}" >/dev/null
+/usr/sbin/groupadd "${GROUP_NAME}" -g "${GROUP_GID}" >/dev/null
 myfatal 252 "Adding group ${GROUP_NAME} ID:${GROUP_GID} failed"
 
-sudo -i useradd ${USER_ADD_CREATE_HOME} -d "${USER_HOME}" -g "${GROUP_NAME}" -u "${USER_UID}" "${USER_NAME}"  >/dev/null
+/usr/sbin/useradd ${USER_ADD_CREATE_HOME} -d "${USER_HOME}" -g "${GROUP_NAME}" -u "${USER_UID}" "${USER_NAME}"  >/dev/null
 myfatal 251 "Adding user ${USER_NAME} ID:${USER_UID} HOME:${USER_HOME} failed"
 
-sudo -i adduser "${USER_NAME}" sudo  >/dev/null
+/usr/sbin/adduser "${USER_NAME}" sudo  >/dev/null
 myfatal 250 "Adding user ${USER_NAME} to sudo group failed"
 
-echo "${USER_NAME}:${USER_PASS}" | chpasswd
+echo "${USER_NAME}:${USER_PASS}" | /usr/sbin/chpasswd
 
 echo ">>>    Uncompress Informix Archive: $ARCHIVE_PATH"
 mkdir -p "${UNPACK_DIR}" "${INSTALL_DIR}"
