@@ -6,24 +6,13 @@ php:
 sudo: true
 
 before_install:
-  - USER_HOME="/home/informix/"
-  - USER_HOME="${USER_HOME%/}"
-  - USER_NAME="informix"
-  - USER_PASS="ifx_pass"
-  - USER_UID=200
-  - GROUP_NAME="${USER_NAME}"
-  - GROUP_GID=200
-  - sudo groupadd "${GROUP_NAME}" -g "${GROUP_GID}"
-  - sudo useradd -m -d "${USER_HOME}" -g "${GROUP_NAME}" -u "${USER_UID}" "${USER_NAME}"
-  - sudo adduser "${USER_NAME}" sudo
-  - echo "${USER_NAME}:${USER_PASS}" | sudo chpasswd
   - sudo apt-get update -qq 
   - sudo apt-get install aria2 curl -y
   - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/edgardmessias/informix-travis/informix-link-server.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; aria2c -x 16 ${DOWNLOAD_LINK} ; ls -l
   - DOWNLOAD_FILE=$(ls iif*.tar)
   - sudo chmod +x *.sh
-  - sudo ./informix_install.sh ${DOWNLOAD_FILE}
-  - sudo ./informix_start.sh
+  - sudo -s ./informix_install.sh ${DOWNLOAD_FILE}
+  - sudo -s ./informix_start.sh
   - export INFORMIXDIR=/opt/IBM/informix
   - git clone https://git.php.net/repository/pecl/database/pdo_informix.git
   - (cd pdo_informix/; phpize && ./configure --with-pdo-informix=${INFORMIXDIR} && make && sudo make install)
