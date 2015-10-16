@@ -32,7 +32,7 @@ GROUP_NAME="${USER_NAME}"
 GROUP_GID=200
 
 # Delete downloaded data including packages
-DO_CLEANUP="YES"
+DO_CLEANUP="NO"
 
 
 ##
@@ -189,7 +189,15 @@ sed -i "s#DBSERVERNAME.*#DBSERVERNAME ${INSTANCE_NAME}#g"                  "${ON
 sed -i "s#DEF_TABLE_LOCKMODE page#DEF_TABLE_LOCKMODE row#g"                "${ONCONFIG_PATH}"
 sed -i "s#TAPEDEV .*#TAPEDEV   ${DATA_DIR}/backup/datas#g"                 "${ONCONFIG_PATH}"
 sed -i "s#LTAPEDEV .*#LTAPEDEV ${DATA_DIR}/backup/logs#g"                  "${ONCONFIG_PATH}"
+sed -i 's#^SBSPACENAME.*#SBSPACENAME sbspace#g'                            "${ONCONFIG_PATH}"
+
+cat "${ONCONFIG_PATH}"
 chown "${USER_NAME}:" "${ONCONFIG_PATH}"
+
+ALARMPROGRAM_PATH="${INSTALL_DIR}"/etc/alarmprogram.sh
+sed -i 's#^BACKUPLOGS.*#BACKUPLOGS=Y#g'              "${ALARMPROGRAM_PATH}"
+sed -i 's#^BACKUP_CMD.*#BACKUP_CMD="ontape -a -d"#g' "${ALARMPROGRAM_PATH}"
+cat "${ALARMPROGRAM_PATH}"
 
 echo ">>>    Postconfig sqlhost ..."
 if [ ! `grep onsoctcp "${SQLHOSTS_PATH}" | wc -l` -ne 0 ] ; then
